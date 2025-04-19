@@ -12,17 +12,18 @@ const camera = new THREE.PerspectiveCamera(
 camera.position.z = 5;
 
 // Renderer setup
-const renderer = new THREE.WebGLRenderer({ antialias: true });
-renderer.setSize(window.innerWidth, window.innerHeight);
-renderer.setClearColor(0x222222);
-document.body.appendChild(renderer.domElement);
+const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+renderer.setPixelRatio(window.devicePixelRatio);
+renderer.setSize(300, 300);
+camera.aspect = 1; // square canvas
+camera.updateProjectionMatrix(); // must update if aspect changes
+document.getElementById('pillowBorder').appendChild(renderer.domElement);
 
 // Light
 const light = new THREE.DirectionalLight(0xffffff,5);
 light.position.set(5, 5, 15);
 scene.add(light);
 scene.fog = new THREE.Fog(0xffffff, 14, 14); 
-scene.background = new THREE.Color(0x1e1e30);
 // Animation mixer
 let mixer;
 
@@ -34,7 +35,7 @@ loader.load(
   'model.glb',
   (gltf) => {
     model = gltf.scene;
-    model.scale.set(0.5, 0.5, 0.5);
+    model.scale.set(0.36, 0.36, 0.36);
     model.position.z = -5;
     scene.add(model);
 

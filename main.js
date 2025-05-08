@@ -1,4 +1,4 @@
-import * as THREE from 'three';
+import * as THREE from './node_modules/three/build/three.module.js';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
 
 // Scene setup
@@ -30,9 +30,10 @@ let mixer;
 // Load model
 const loader = new GLTFLoader();
 let model;
+loader.setPath(''); 
 
 loader.load(
-  'model.glb',
+  '/model.glb',
   (gltf) => {
     model = gltf.scene;
     model.scale.set(0.36, 0.36, 0.36);
